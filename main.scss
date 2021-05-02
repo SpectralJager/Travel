@@ -20,9 +20,13 @@ video, img{
         1rem;
     gap: 0 1vw;
     width: 100vw;
+    overflow-x: hidden;
+    @media screen and (min-width:1100px){
+        grid-template-columns: repeat(12,1fr) ;
+    }
 }
 .hero{
-    grid-column: 1/7;
+    grid-column: 1/-1;
     display: grid;
     grid-template-columns: subgrid;
     grid-template-rows: 70px auto 70px;
@@ -32,7 +36,7 @@ video, img{
     background-size: cover;
 
     header{
-        grid-column: 2/6;
+        grid-column: 2/-2;
         display: grid;
         grid-template-columns: subgrid;
         place-items: center center;
@@ -46,7 +50,7 @@ video, img{
         .nav{
             grid-column: 3/6;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             width: 100%;
             color: rgba(#fff, 0.7);
             font-size: clamp(1rem, 4vw, 1.5rem); 
@@ -68,6 +72,22 @@ video, img{
             font-size: clamp(1rem, 5vw, 2rem);
             color: #fff;
         }
+        @media screen and (min-width:720px){
+            display: grid;
+            grid-template-columns: subgrid;
+            grid-auto-flow: dense;
+            .title{
+                grid-column: 1/3;
+                font-size: clamp(2rem, 6vw, 4rem);
+            }
+            video{
+                grid-column: 3/5;
+            }
+            .discription{
+                font-size: clamp(1rem, 3vw, 2rem);
+                grid-column: 1/3;
+            }
+        }
     }
     .links{
         grid-column: 2/6;
@@ -78,9 +98,36 @@ video, img{
         width: clamp(200px, 60vw, 500px);
         font-size: clamp(1rem, 5vw, 2rem);
     }
+    @media screen and (min-width:1100px){
+        header{
+            .logo{
+                grid-column: 1/3;
+            }
+            .nav{
+                grid-column: 8/-1;
+            }
+        }
+        &__container{
+            grid-column: 3/-3;
+            .title{
+                grid-column: 1/6;
+            }
+            video{
+                grid-column: 6/-1;
+                place-self: center center;
+            }
+            .discription{
+                grid-column: 1/5;
+            }
+        }
+        .links{
+            grid-column: 9/-2;
+            width: 100%;
+        }
+    }
 }
 .about{
-    grid-column: 1/7;
+    grid-column: 1/-1;
     display: grid;
     grid-template-columns: subgrid;
     background: url('imgs/discription-bg.png');
@@ -101,16 +148,26 @@ video, img{
         place-self: start center;
         font-size: clamp(1.5rem, 5vw, 2rem);
     }
+    @media screen and (min-width:720px){
+        .title, .text{
+            grid-column: 4/6;
+        }
+    }
+    @media screen and (min-width:1100px){
+        .title, .text{
+            grid-column: -5/-2;
+        }
+    }
 
 }
 .oportunity{
-    grid-column: 1/7;
+    grid-column: 1/-1;
     display: grid;
     grid-template-columns: subgrid;
     background: linear-gradient(#816212, #E4B845);
     padding: 10% 0;
     .benefits{
-        grid-column: 2/6;
+        grid-column: 2/-2;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
@@ -119,28 +176,13 @@ video, img{
         color: #fff;
         margin-bottom: 2rem;
         &__item{
-            width: clamp(100px, 40vw, 400px);
+            width: clamp(100px, 40vw, 300px);
             font-size: clamp(1rem, 3vw, 1.5rem);
             img{
-                position: relative;
-                z-index: 2;
-            }
-            p{  
                 display: block;
-                position: relative;
-                &::before{
-                    content: "";
-                    position: absolute;
-                    top: -100%;
-                    right: 50%;
-                    transform-origin: center;
-                    transform: translate(50%, -60%);
-                    z-index: 1;
-                    width: 100px;
-                    height: 100px;
-                    border-radius: 100%;
-                    background-color: #D5C748;
-                }
+                width: 100px;
+                height: 90px;
+                margin: 0 auto;
             }
         }
     }
@@ -160,22 +202,77 @@ video, img{
         }
     }
     .img-galery{
-        grid-column: 2/6;
+        grid-column: 2/-2;
         margin-bottom: 1rem;
         img{
             border-radius: 1rem;
             margin-bottom: 1rem;
         }
     }
+    @media screen and (min-width:720px){
+        .discription1, .discription2{
+            display: grid;
+            grid-template-columns: subgrid;
+            grid-template-rows: 4rem auto;
+            img{
+                grid-column: 1/3;
+                grid-row: 1/3;
+            }
+            .title, .text{
+                grid-column: 3/5;
+            }
+        }
+        .img-galery{
+            display: grid;
+            grid-template-columns: subgrid;
+            align-items: stretch;
+            :nth-child(2){
+                grid-column: 2/4;
+            }
+        }
+    }
+    @media screen and (min-width:1100px){
+        .discription1{
+            grid-column: 2/9;
+            img{
+                grid-column: 1/4;
+                align-self: stretch;
+            }
+            .title, .text{
+                grid-column: 4/-1;
+            }
+        }
+        .discription2{
+            grid-column: -2/-9;
+            img{
+                grid-column: -1/-4;
+                align-self: stretch;
+            }
+            .title, .text{
+                grid-column: -4/1;
+            }
+        }
+        .img-galery{
+            :first-child{
+                grid-column: 1/4;
+            }
+            :nth-child(2){
+                grid-column: 4/-4;
+            }
+            :last-child{
+                grid-column: -1/-4;
+            }
+        }
+    }
 }
 .contact{
-    grid-column: 1/7;
+    grid-column: 1/-1;
     display: grid;
     grid-template-columns: subgrid;
     background: url('imgs/samuel-ferrara-dKJXkKCF2D8-unsplash.jpg');
     background-position: center;
     background-size: cover;
-    height: 500px;
+    padding: 10% 0;
     &__form{
         place-self: center center;
         width: 100%;
@@ -187,6 +284,7 @@ video, img{
             color: #E4B845;
             text-align: center;
             margin-bottom: 1rem;
+            font-size: clamp(2rem, 4vw, 3.5rem);
         }
         label{
             color: #fff;
@@ -211,6 +309,16 @@ video, img{
             border-radius: 1rem;
             font-size: clamp(1rem, 4vw, 2rem);
             cursor: pointer;
+        }
+    }
+    @media screen and (min-width:720px){
+        &__form{
+            grid-column: 3/5;
+        }
+    }
+    @media screen and (min-width:1100px){
+        &__form{
+            grid-column: 4/-4;
         }
     }
 }
